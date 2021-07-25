@@ -22,21 +22,9 @@ function getDate() {
     /*  ["2021", "07",    let date = document.getElementById("dateFormat").value; "25"]
         ["2022","02","22" ]
     */
-    let revDateFormat = this.getReverseDate(dateSplit);
-    let secDateFormat = this.secDateFormat(dateSplit);
-    let thirdDateFormat = this.thirdDateFormat(dateSplit);
-    let dateArrays = [...revDateFormat, secDateFormat, thirdDateFormat]
-    let result = [];
-    for (let dateStr of dateArrays) {
-        // console.log(this.checkPallindrome(dateStr))
-        if (this.checkPallindrome(dateStr) === true) {
-            result.push(true);
-            break;
-        } else {
-            result.push(false);
-        }
-    }
-    if (result.includes(true)) {
+    let dateArrays = this.getArrayOfAllFrom(this.getReverseDate(dateSplit), this.secDateFormat(dateSplit), this.thirdDateFormat(dateSplit))
+
+    if (dateArrays.includes(true)) {
         document.getElementById("divId").innerHTML = "Pallindrome"
     } else {
         document.getElementById("divId").innerHTML = "Not Pallindrome"
@@ -84,3 +72,19 @@ function checkPallindrome(dateStr) {
     /* true  or false */
     return (count === checkCount ? true : false);
 }
+/* get arrays of true and false */
+function getArrayOfAllFrom(revDateFormat, secDateFormat, thirdDateFormat) {
+    let dateArr = [...revDateFormat, secDateFormat, thirdDateFormat]
+    let result = [];
+    for (let dateStr of dateArr) {
+        if (this.checkPallindrome(dateStr)) {
+            result.push(true);
+            break;
+        } else {
+            result.push(false);
+        }
+    }
+    return result;
+}
+
+
