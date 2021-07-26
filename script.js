@@ -96,9 +96,9 @@ function checkDateAllFormat(revDateFormat, secDateFormat, thirdDateFormat) {
     return result;
 }
 
-function daysInMonth(args) {
+function monthChange(args) {
     l1 = [31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
-    return l1[1]
+    return l1[args]
 }
 
 function checkNextandPrevPallindrome(dataString) {
@@ -111,12 +111,13 @@ function checkNextandPrevPallindrome(dataString) {
     let forwardYear = Number(dataString[0]);
     let backwardYear = Number(dataString[0]);
 
-    let missingdate = 0;
+    let fmissingdate = 0;
+    let lmissiingdate = 0;
     let i = 0
-    while (i <= 3) {
-        missingdate += 1;
+    while (true) {
+        fmissingdate += 1;
         forwardDate += 1;
-        if (forwardDate > this.daysInMonth(forwardMonth - 1)) {
+        if (forwardDate > monthChange(forwardMonth - 1)) {
             forwardDate = 1;
             forwardMonth += 1;
             if (forwardMonth > 12) {
@@ -132,8 +133,11 @@ function checkNextandPrevPallindrome(dataString) {
         const val = this.checkDateAllFormat(this.getReverseDate(tempArr), this.secDateFormat(tempArr), this.thirdDateFormat(tempArr))
 
         // return
-        console.log(val)
-        i += 1;
-
+        if (val.includes(true)) {
+            document.getElementById("divId").innerHTML = `you are near ${fmissingdate} `
+            break;
+        }
     }
+
+
 }
