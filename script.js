@@ -88,6 +88,7 @@ function checkDateAllFormat(revDateFormat, secDateFormat, thirdDateFormat) {
         // console.log(this.checkPallindrome(dateStr))
         if (this.checkPallindrome(dateStr) === true) {
             result.push(true);
+            result.push(dateStr);
             break;
         } else {
             result.push(false);
@@ -114,28 +115,29 @@ function checkNextandPrevPallindrome(dataString) {
     let fmissingdate = 0;
     let lmissiingdate = 0;
     let i = 0
-    /*  while (true) {
-         fmissingdate += 1;
-         forwardDate += 1;
-         if (forwardDate > monthChange(forwardMonth - 1)) {
-             forwardDate = 1;
-             forwardMonth += 1;
-             if (forwardMonth > 12) {
-                 forwardMonth = 1;
-                 forwardYear += 1
-             }
-         }
- 
-         let tempForwardMonth = forwardMonth.toString().length === 1 ? "0" + forwardMonth.toString() : forwardMonth.toString();
-         let tempForwardDate = forwardDate.toString().length === 1 ? "0" + forwardDate.toString() : forwardDate.toString();
-         let tempForwardArr = [forwardYear.toString(), tempForwardMonth, tempForwardDate]
-         console.log(tempForwardArr)
-         const val = this.checkDateAllFormat(this.getReverseDate(tempForwardArr), this.secDateFormat(tempForwardArr), this.thirdDateFormat(tempForwardArr))
-         if (val.includes(true)) {
-             document.getElementById("divId").innerHTML = `you are near ${fmissingdate} `
-             break;
-         }
-     } */
+    /*    while (true) {
+           fmissingdate += 1;
+           forwardDate += 1;
+           if (forwardDate > monthChange(forwardMonth - 1)) {
+               forwardDate = 1;
+               forwardMonth += 1;
+               if (forwardMonth > 12) {
+                   forwardMonth = 1;
+                   forwardYear += 1
+               }
+           }
+   
+           let tempForwardMonth = forwardMonth.toString().length === 1 ? "0" + forwardMonth.toString() : forwardMonth.toString();
+           let tempForwardDate = forwardDate.toString().length === 1 ? "0" + forwardDate.toString() : forwardDate.toString();
+           let tempForwardArr = [forwardYear.toString(), tempForwardMonth, tempForwardDate]
+           const val = this.checkDateAllFormat(this.getReverseDate(tempForwardArr), this.secDateFormat(tempForwardArr), this.thirdDateFormat(tempForwardArr))
+           if (val.includes(true)) {
+               console.log(fmissingdate)
+               console.log(val[1])
+               document.getElementById("divId").innerHTML = `you are near ${fmissingdate} `
+               break;
+           }
+       } */
 
     while (true) {
         lmissiingdate += 1;
@@ -157,14 +159,42 @@ function checkNextandPrevPallindrome(dataString) {
 
         let tempBackwardMonth = backwardMonth.toString().length === 1 ? "0" + backwardMonth.toString() : forwardMonth.toString();
         let tempBackwardDate = backwardDate.toString().length === 1 ? "0" + backwardDate.toString() : backwardDate.toString();
-        let tempbackArr = [backwardYear.toString(), tempBackwardMonth, tempBackwardDate]
-        const val = checkDateAllFormat(getReverseDate(tempbackArr), secDateFormat(tempbackArr), thirdDateFormat(tempbackArr))
+        let tempArr = [backwardYear.toString(), tempBackwardMonth, tempBackwardDate]
+        const val = checkDateAllFormat(getReverseDate(tempArr), secDateFormat(tempArr), thirdDateFormat(tempArr))
 
         if (val.includes(true)) {
-            console.log(lmissiingdate)
-            console.log(tempbackArr)
+            let allComMatchArr = permutation(tempArr);
+            console.log("array to be" + val[1]);
+            [...allComMatchArr].map(ele => {
+                console.log(ele)
+                if (ele.join("") === val[1]) {
+                    console.log(ele)
+                    console.log(lmissiingdate)
+                    document.getElementById("divId").innerHTML = ` The pallindrome date ${ele[0]} -${ele[1]} - ${ele[2]}`
+                    document.getElementById("divMissing").innerHTML = `missing date  ${lmissiingdate}`
+                }
+            })
             break;
         }
     }
 
+}
+
+
+const permutation = (element) => {
+    if (element.length === 0) return [[]];
+    const firstEl = element[0];
+    const rest = element.slice(1);
+
+    const permuatationWithoutFirst = permutation(rest);
+
+    const allPermutations = [];
+
+    permuatationWithoutFirst.forEach(ele => {
+        for (let i = 0; i <= ele.length; i++) {
+            const permsWithFirst = [...ele.slice(0, i), firstEl, ...ele.slice(i)]
+            allPermutations.push(permsWithFirst)
+        }
+    })
+    return allPermutations;
 }
