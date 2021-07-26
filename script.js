@@ -114,30 +114,57 @@ function checkNextandPrevPallindrome(dataString) {
     let fmissingdate = 0;
     let lmissiingdate = 0;
     let i = 0
+    /*  while (true) {
+         fmissingdate += 1;
+         forwardDate += 1;
+         if (forwardDate > monthChange(forwardMonth - 1)) {
+             forwardDate = 1;
+             forwardMonth += 1;
+             if (forwardMonth > 12) {
+                 forwardMonth = 1;
+                 forwardYear += 1
+             }
+         }
+ 
+         let tempForwardMonth = forwardMonth.toString().length === 1 ? "0" + forwardMonth.toString() : forwardMonth.toString();
+         let tempForwardDate = forwardDate.toString().length === 1 ? "0" + forwardDate.toString() : forwardDate.toString();
+         let tempForwardArr = [forwardYear.toString(), tempForwardMonth, tempForwardDate]
+         console.log(tempForwardArr)
+         const val = this.checkDateAllFormat(this.getReverseDate(tempForwardArr), this.secDateFormat(tempForwardArr), this.thirdDateFormat(tempForwardArr))
+         if (val.includes(true)) {
+             document.getElementById("divId").innerHTML = `you are near ${fmissingdate} `
+             break;
+         }
+     } */
+
     while (true) {
-        fmissingdate += 1;
-        forwardDate += 1;
-        if (forwardDate > monthChange(forwardMonth - 1)) {
-            forwardDate = 1;
-            forwardMonth += 1;
-            if (forwardMonth > 12) {
-                forwardMonth = 1;
-                forwardYear += 1
+        lmissiingdate += 1;
+        backwardDate -= 1;
+        if (backwardDate < 1) {
+            backwardMonth -= 1;
+            if (backwardMonth < 1) {
+                backwardYear -= 1;
+                if (backwardYear < 1) {
+                    return "    "
+                } else {
+                    backwardDate = 31;
+                    backwardMonth = 12;
+                }
+            } else {
+                backwardDate = monthChange(backwardMonth - 1)
             }
         }
 
-        let tempForwardMonth = forwardMonth.toString().length === 1 ? "0" + forwardMonth.toString() : forwardMonth.toString();
-        let tempForwardDate = forwardDate.toString().length === 1 ? "0" + forwardDate.toString() : forwardDate.toString();
-        let tempArr = [forwardYear.toString(), tempForwardMonth, tempForwardDate]
-        console.log(tempArr)
-        const val = this.checkDateAllFormat(this.getReverseDate(tempArr), this.secDateFormat(tempArr), this.thirdDateFormat(tempArr))
+        let tempBackwardMonth = backwardMonth.toString().length === 1 ? "0" + backwardMonth.toString() : forwardMonth.toString();
+        let tempBackwardDate = backwardDate.toString().length === 1 ? "0" + backwardDate.toString() : backwardDate.toString();
+        let tempbackArr = [backwardYear.toString(), tempBackwardMonth, tempBackwardDate]
+        const val = checkDateAllFormat(getReverseDate(tempbackArr), secDateFormat(tempbackArr), thirdDateFormat(tempbackArr))
 
-        // return
         if (val.includes(true)) {
-            document.getElementById("divId").innerHTML = `you are near ${fmissingdate} `
+            console.log(lmissiingdate)
+            console.log(tempbackArr)
             break;
         }
     }
-
 
 }
