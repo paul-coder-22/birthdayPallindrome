@@ -19,16 +19,16 @@ console.log(count) */
 function getDate() {
     let date = document.getElementById("dateFormat").value;
     let dateSplit = date.split("-")
-    /*  ["2021", "07",    let date = document.getElementById("dateFormat").value; "25"]
+    /*  ["2021", "07", "25"]
         ["2022","02","22" ]
     */
 
-    const result = this.checkDateAllFormat(this.getReverseDate(dateSplit), this.secDateFormat(dateSplit), this.thirdDateFormat(dateSplit))
+    const result = checkDateAllFormat(this.getReverseDate(dateSplit), this.secDateFormat(dateSplit), this.thirdDateFormat(dateSplit))
     console.log(result)
     if (result.includes(true)) {
         document.getElementById("divId").innerHTML = "Pallindrome"
     } else {
-        this.checkNextandPrevPallindrome(dateSplit)
+        checkNextandPrevPallindrome(dateSplit)
         /** */
     }
 
@@ -82,11 +82,11 @@ function checkPallindrome(dateStr) {
 }
 
 function checkDateAllFormat(revDateFormat, secDateFormat, thirdDateFormat) {
-    let dateArrays = [...revDateFormat, secDateFormat, thirdDateFormat]
+    let dateArrays = [...revDateFormat, secDateFormat, thirdDateFormat] //one date all format
     let result = [];
     for (let dateStr of dateArrays) {
         // console.log(this.checkPallindrome(dateStr))
-        if (this.checkPallindrome(dateStr) === true) {
+        if (checkPallindrome(dateStr) === true) {
             result.push(true);
             result.push(dateStr);
             break;
@@ -115,31 +115,31 @@ function checkNextandPrevPallindrome(dataString) {
     let fmissingdate = 0;
     let lmissiingdate = 0;
     let i = 0
-    /*    while (true) {
-           fmissingdate += 1;
-           forwardDate += 1;
-           if (forwardDate > monthChange(forwardMonth - 1)) {
-               forwardDate = 1;
-               forwardMonth += 1;
-               if (forwardMonth > 12) {
-                   forwardMonth = 1;
-                   forwardYear += 1
-               }
-           }
-   
-           let tempForwardMonth = forwardMonth.toString().length === 1 ? "0" + forwardMonth.toString() : forwardMonth.toString();
-           let tempForwardDate = forwardDate.toString().length === 1 ? "0" + forwardDate.toString() : forwardDate.toString();
-           let tempForwardArr = [forwardYear.toString(), tempForwardMonth, tempForwardDate]
-           const val = this.checkDateAllFormat(this.getReverseDate(tempForwardArr), this.secDateFormat(tempForwardArr), this.thirdDateFormat(tempForwardArr))
-           if (val.includes(true)) {
-               console.log(fmissingdate)
-               console.log(val[1])
-               document.getElementById("divId").innerHTML = `you are near ${fmissingdate} `
-               break;
-           }
-       } */
-
     while (true) {
+        fmissingdate += 1;
+        forwardDate += 1;
+        if (forwardDate > monthChange(forwardMonth - 1)) {
+            forwardDate = 1;
+            forwardMonth += 1;
+            if (forwardMonth > 12) {
+                forwardMonth = 1;
+                forwardYear += 1
+            }
+        }
+
+        let tempForwardMonth = forwardMonth.toString().length === 1 ? "0" + forwardMonth.toString() : forwardMonth.toString();
+        let tempForwardDate = forwardDate.toString().length === 1 ? "0" + forwardDate.toString() : forwardDate.toString();
+        let tempForwardArr = [forwardYear.toString(), tempForwardMonth, tempForwardDate]
+        const val = this.checkDateAllFormat(this.getReverseDate(tempForwardArr), this.secDateFormat(tempForwardArr), this.thirdDateFormat(tempForwardArr))
+        if (val.includes(true)) {
+            console.log(fmissingdate)
+            console.log(val[1])
+            document.getElementById("divId").innerHTML = `you are near ${fmissingdate} `
+            break;
+        }
+        // } * /
+
+        // while (true) {
         lmissiingdate += 1;
         backwardDate -= 1;
         if (backwardDate < 1) {
@@ -168,6 +168,7 @@ function checkNextandPrevPallindrome(dataString) {
             [...allComMatchArr].map(ele => {
                 console.log(ele)
                 if (ele.join("") === val[1]) {
+                    console.log(val[1])
                     console.log(ele)
                     console.log(lmissiingdate)
                     document.getElementById("divId").innerHTML = ` The pallindrome date ${ele[0]} -${ele[1]} - ${ele[2]}`
@@ -196,5 +197,6 @@ const permutation = (element) => {
             allPermutations.push(permsWithFirst)
         }
     })
+    console.log(allPermutations)
     return allPermutations;
 }
