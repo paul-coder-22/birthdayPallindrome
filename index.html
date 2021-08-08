@@ -5,18 +5,66 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./style.css">
+    <script src="https://kit.fontawesome.com/fb676f87ae.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="./styles.css">
     <title>Bithday | Pallindrome</title>
 </head>
 
 <body>
-    <div style="text-align: center;">
-        <input id="dateFormat" type="date">
-        <button id="btn">Click</button>
+
+    <div class="main-container">
+
+        <div class="text-heading">
+
+            <div class="main-heading">
+                <h1>Check If your Birthday Date is Lucky or not</h1>
+                <p>A palindrome is a word/number which reads the same backward as forward</p>
+            </div>
+
+            <div class="sub-heading">
+                <h1>Enter your birthdate and we will tell you if your birthdate is a palindrome</h1>
+                <h4>This app checks your birthdate in 4 formats yyyy-mm-dd, dd-mm-yyyy, mm-dd-yy, m-dd-yyyy</h4>
+                <h4>e.g. if your birthdate is 01 Aug 1995, then app will check for 19950801, 01081995, 080195, 1081995
+                </h4>
+            </div>
+        </div>
+
+        <div class="function-container">
+
+            <div class="input-container">
+                <input id="dateFormat" type="date">
+                <button id="btn">Click</button>
+
+            </div>
+
+            <div id="divId" class="output-container">
+                Hello
+            </div>
+
+
+        </div>
+
+
+
+        <div class="nav-container">
+            <div class="navbar">
+                <div class="icon1">GitHub</div>
+                <div class="icon2">Linkedin</div>
+                <div class="icon3">Twitter</div>
+            </div>
+        </div>
+
     </div>
 
-    <div id="divId" style="border: 1px solid red; width: 100px;height: 100px;">
 
-    </div>
+
+
+
+
 
 
     <script src="script.js"></script>

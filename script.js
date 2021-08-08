@@ -18,7 +18,6 @@ const checkUserDateFormat = () => {
      * @DateSpliting
      */
     let splitDate = userDate.value.split("-");
-    console.log(splitDate)
     let inputDate = splitDate[2];
     let inputMonth = splitDate[1];
     let inputYear = splitDate[0];
@@ -74,6 +73,7 @@ function dateFormat(date, month, year) {
 function isPallindrome(dateStr) {
     const reverseStr = dateStr.toString().split("").reverse().join("");
     if (dateStr === reverseStr) {
+        console.log(dateStr)
         return true
     }
 }
@@ -124,11 +124,12 @@ function nextPallindrome(day, month, year) {
 
         let checkForwardPallindrome = dateFormat(forwardDate, forwardMonth, forwardYear);
         if (checkForwardPallindrome) {
+            console.log(checkForwardPallindrome, misssingdate)
             return [checkForwardPallindrome, misssingdate];
         }
 
 
-        console.log(forwardYear + " =========== " + backwardYear)
+        // console.log(forwardYear + " =========== " + backwardYear)
         /**
          * @DateDecrementating
          */
@@ -151,6 +152,7 @@ function nextPallindrome(day, month, year) {
         // let checkBackWardPallindrome = dateFormat(forwardDate, forwardMonth, forwardYear);
         let checkBackWardPallindrome = dateFormat(backwardDate, backwardMonth, backwardYear);
         if (checkBackWardPallindrome) {
+            console.log(checkBackWardPallindrome, misssingdate)
             return [checkBackWardPallindrome, misssingdate];
         }
     }
