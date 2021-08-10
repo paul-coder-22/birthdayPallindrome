@@ -11,9 +11,10 @@
     --hover-color:#27272c;
     --bold-text:#3e32e4; 
     --output :#00FF66; 
+    --first : #E84E42;
 }
 
-.main-container{
+/* .main-container{
     width: 100vw;
     min-height: 100vh;
     border: 2px solid var(--bold-text);
@@ -47,32 +48,31 @@
     width: 20%;
     border: 1px solid var(--bold-text);
     color: var(--border-text);
-}
+} */
 
 
 /* nav bar */
-.nav-container{
+/* .nav-container{
     background-color: var(--background);
     border: 1px solid red;
-    width: 100vw;
+    width: 100%;
     display: flex;
     justify-content: center;
     position: absolute;
-    bottom: 0%;
-    
-}
+    bottom: 0;
+} */
 
-.nav-container .navbar{
+/* .nav-container .navbar{
     display: flex;
     justify-content: center;
 }
 
 .nav-container .navbar > *  {
     margin: 1rem;
-    /* padding: 0.8rem 1rem; */
+    padding: 0.8rem 1rem;
     padding: .64em .4rem;
     font-weight: 800;
-    /* border: 1px solid white; */
+    border: 1px solid white;
     border-radius: 0.5rem;
     color: var(--border-text);
     transition: 0.5s;
@@ -82,7 +82,159 @@
     border-radius: 0.5rem;
     color: var(--text-color);
     cursor: pointer;
-    /* border: 0.1px solid rgba(0,0,0,.6); */
+    border: 0.1px solid rgba(0,0,0,.6);
 
-    /* border-radius: 0.5rem; */
+    border-radius: 0.5rem;
+} */
+/* 
+.main-container{
+    width: 100%;
+}
+
+.main-container .card-container{
+    width: 80%;
+    border: 1px solid red;
+    margin: 3rem auto;
+}
+.main-container .card-container .nav-bar{
+    margin: .5rem;
+    width: 100%;
+    display: flex;
+}
+
+.main-container .card-container .nav-bar .firstnavItems{
+    display: flex;
+    justify-content: center;
+    height: 40px;
+    width: 60%;
+}
+
+.main-container .card-container .nav-bar .secondnavItems{
+    display: flex;
+    width: 40%;
+    justify-content: end;
+    background-color: var(--first);
+}
+
+.main-container .card-container .nav-bar .secondnavItems > * {
+    margin:  .7rem;
+    padding: .3rem;
+    border: 1px solid red;
+}
+
+
+.card-container .verticalCardBody{
+    display: flex;
+    height: 70vh;
+    background-color: var(--first);
+} */
+.main-container{
+    width: 100%;
+    /* border: 1px solid red; */
+    height: 100vh;
+    
+}
+
+.main-container .card-container{
+    display: flex;
+    width: 80%;
+    height: 500px;
+    margin: auto;
+    margin-top: 3rem;
+    /* border: none; */
+    outline: none;
+    box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+}
+.card-container .div1{
+    width: 40%;
+    
+}
+.card-container .div1 .div1navBar{
+    height: 64px;
+    border: 1px solid red;
+}
+.card-container .div1 .div1Content{
+
+    text-align: center;
+}
+.card-container .div1 .div1Content  h4{
+    opacity: 0.7;
+}
+
+
+
+
+.card-container .div2{
+    width: 60%;
+    background-color: var(--first);
+}
+
+.div2 .div2navBar{
+    border: 1px solid var(--first);
+    margin: 0.4rem;
+    padding: 0.2%;
+
+}
+.div2 .div2navBar .navItems{
+    display: flex;
+    justify-content: flex-end;
+}
+
+.div2 .div2navBar .navItems > *{
+    margin: .4rem;
+    padding: .3rem;
+    color: var(--border-text);
+    font-weight: 400;
+}
+.div2 .div2Content{
+    text-align: center;
+    color: var(--border-text);
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    width: 100%;
+    
+}
+.div2 .div2Content span{
+    color: var(--background);
+}
+.div2 .div2Content p{
+    width: 60%;
+    margin: auto;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+.div2 .div2Content .secondHeading{
+    font-size: 1.8rem;
+}
+
+.div2 .div2Content .input-container  > *{
+    cursor: pointer;
+}
+
+.div2 .div2Content .input-container{
+    margin-top: 1rem;
+    outline: none;
+}
+.div2 .div2Content .input-container button{
+    display: block;
+    border: 2px solid var(--border-text);
+    margin: 1rem auto;
+    padding: .3rem .5rem;
+    outline: none;
+    font-weight: 800;
+    font-size: 0.9rem;
+    color: var(--background);
+    border-color: var(--border-text);
+}
+
+/* background: transparent; */
+/* background-color: var(--border-text); */
+
+
+@media only screen and (max-width: 1039px) {
+.main-container .card-container{
+    /* flex-direction: column-reverse; */
+}
+    .card-container .div2{
+         /* width: 100%; */
+    }
 }

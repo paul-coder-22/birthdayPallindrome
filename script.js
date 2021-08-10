@@ -35,6 +35,9 @@ const checkUserDateFormat = () => {
 
 
 function dateFormat(date, month, year) {
+    console.log(date)
+    console.log(month)
+    console.log(year)
     let strDate = date.toString();
     let strMonth = month.toString();
     let strYear = year.toString();
