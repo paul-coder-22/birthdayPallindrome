@@ -1,163 +1,156 @@
 
-let $ = document;
-let userDate = $.getElementById("dateFormat");
+let dataInput = document.querySelector('#dateFormat'); //
+let output = document.querySelector('#output');
+let showBtn = document.querySelector('#btn');
 
+showBtn.addEventListener('click', () => {
+    let bdayStr = dataInput.value;
+    if (bdayStr != "") {
+        let listOfDate = bdayStr.split("-");
+        let dateObj = {
+            day: Number(listOfDate[2]),
+            month: Number(listOfDate[1]),
+            year: Number(listOfDate[0])
+        }
 
-$.getElementById("btn").addEventListener("click", () => {
-    if (userDate.value === "") {
-        $.getElementById("divId").innerHTML = "Put valid no"
-    } else {
-        checkUserDateFormat()
+        let pallindrome = checkPallindromeDateFrCombination(dateObj);
+
+        if (pallindrome) {
+            output.innerHTML = `Your Birthdate is Pallindrome`
+        } else {
+            // let [missDate, nextDate] = getNextPallindromeDate(dateObj);
+            let [missDate, nextDate] = getNextPallindromeDate(dateObj);
+            output.innerHTML = `You miss by ${missDate}. Date : ${nextDate.day} - ${nextDate.month} - ${nextDate.year}`
+        }
     }
 })
 
-
-const checkUserDateFormat = () => {
-
-    /** 
-     * @DateSpliting
-     */
-    let splitDate = userDate.value.split("-");
-    let inputDate = splitDate[2];
-    let inputMonth = splitDate[1];
-    let inputYear = splitDate[0];
-
-    let checkFormat = dateFormat(inputDate, inputMonth, inputYear);
-    if (checkFormat) {
-        $.getElementById("divId").innerHTML = `Your birthday is in pallindrome format ${someYearFormat}`
-    } else {
-        let newDate = nextPallindrome(inputDate, inputMonth, inputYear);
-        console.log(newDate[0] + "  " + newDate[1])
-        $.getElementById("divId").innerHTML = `${newDate[0]} - ${newDate[1]}`
-
-    }
-}
-
-
-function dateFormat(date, month, year) {
-    console.log(date)
-    console.log(month)
-    console.log(year)
-    let strDate = date.toString();
-    let strMonth = month.toString();
-    let strYear = year.toString();
-
-    if (strDate.length === 1) {
-        strDate = "0" + strDate;
-    }
-    if (strMonth.length === 1) {
-        strMonth = "0" + strMonth;
-    }
-    /* d m y
-    m d y
-    y m d    */
-    const formatOne = strDate + strMonth + strYear;
-    const formatTwo = strMonth + strDate + strYear;
-    const formatThree = strYear + strMonth + strDate;
-
-    if (isPallindrome(formatOne)) {
-
-        return (`${strDate} - ${strMonth} - ${strYear}`)
-
-    } else if (isPallindrome(formatTwo)) {
-
-        return (`${strMonth} - ${strDate} - ${strYear}`)
-
-    } else if (isPallindrome(formatThree)) {
-
-        return (`${strYear}- ${strMonth}-${strDate}`)
-
-    } else {
-        return null;
-    }
-
-}
-
-function isPallindrome(dateStr) {
-    const reverseStr = dateStr.toString().split("").reverse().join("");
-    if (dateStr === reverseStr) {
-        console.log(dateStr)
-        return true
-    }
-}
-/* return one month */
-const checkMonth = (monthArgs) => {
-    [31,
-        Number(`${new Date().getFullYear() % 4 ? 29 : 28}`),
-        31,
-        30,
-        31,
-        30,
-        31,
-        31,
-        30,
-        31,
-        30,
-        31][monthArgs]
-}
-
-function nextPallindrome(day, month, year) {
-    let forwardDate = Number(day)
-    let backwardDate = Number(day)
-
-    let forwardMonth = Number(month)
-    let backwardMonth = Number(month)
-
-    let forwardYear = Number(year)
-    let backwardYear = Number(year)
-
-    let misssingdate = 0;
+function getNextPallindromeDate(dateObj) {
+    let missDate = 0;
+    let nextDate = getNextdate(dateObj);
 
     while (true) {
+        missDate++;
+        if (checkPallindromeDateFrCombination(nextDate)) {
+            return [missDate, nextDate];
+            // break;
+        }
 
-        misssingdate += 1;
+        nextDate = getNextdate(nextDate);
+    }
+}
 
-        /**
-        * @DateIncrementing
-        */
-        forwardDate += 1
-        if (forwardDate > checkMonth(forwardMonth - 1)) {
-            forwardDate = 1;
-            forwardMonth += 1;
-            if (forwardMonth > 12) {
-                forwardMonth = 1;
-                forwardYear += 1;
+function getNextdate(dateObj) {
+    let day = dateObj.day + 1;
+    let month = dateObj.month;
+    let year = dateObj.year;
+
+    let daysInMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+
+    /* leapYear month check */
+    if (month === 2) {
+        if (checkLeapYear(year)) {
+
+            if (day > 29) {
+                day = 1;
+                month++;
+            }
+        } else {
+            if (day > 28) {
+                day = 1;
+                month++;
             }
         }
-
-        let checkForwardPallindrome = dateFormat(forwardDate, forwardMonth, forwardYear);
-        if (checkForwardPallindrome) {
-            console.log(checkForwardPallindrome, misssingdate)
-            return [checkForwardPallindrome, misssingdate];
+    } else {
+        if (day > daysInMonth[month - 1]) {
+            day = 1;
+            month++;
         }
 
+    }
 
-        // console.log(forwardYear + " =========== " + backwardYear)
-        /**
-         * @DateDecrementating
-         */
-        backwardDate -= 1;
-        if (backwardDate < 1) {
-            backwardMonth -= 1;
-            if (backwardMonth < 1) {
-                backwardYear -= 1;
-                if (backwardYear < 1) {
-                    return ["", ""]
-                } else {
-                    backwardMonth = 12;
-                    backwardDate = 31;
-                }
-            } else {
-                backwardDate = checkMonth(backwardMonth - 1)
-            }
-        }
-        /*  backward date  incrementing*/
-        // let checkBackWardPallindrome = dateFormat(forwardDate, forwardMonth, forwardYear);
-        let checkBackWardPallindrome = dateFormat(backwardDate, backwardMonth, backwardYear);
-        if (checkBackWardPallindrome) {
-            console.log(checkBackWardPallindrome, misssingdate)
-            return [checkBackWardPallindrome, misssingdate];
+    if (month > 12) {
+        month = 1;
+        year++;
+    }
+
+    return {
+        day: day,
+        month: month,
+        year: year
+    }
+
+}
+
+/* leap year check */
+function checkLeapYear(year) {
+
+    if ((year % 4 === 0) && (year % 100 !== 0) || (year % 400 === 0)) {
+        return true
+    } else {
+        return false;
+    }
+}
+
+function checkPallindromeDateFrCombination(date) {
+    let allFormDates = getAllFormDate(date); //[]
+
+    let flag = false;
+
+    for (let i = 0; i < allFormDates.length; i++) {
+        if (isPallindrome(allFormDates[i])) {
+            flag = true;
+            break;
         }
     }
+    return flag;
+}
+
+function isPallindrome(dateFormStr) {
+    let reverseDateStr = reverseDate(dateFormStr);
+    return dateFormStr === reverseDateStr;
+}
+
+function reverseDate(dateFormStr) {
+    let listOfChar = dateFormStr.split("");
+    let reverseListOfChar = listOfChar.reverse();
+    let reversedString = reverseListOfChar.join("");
+    return reversedString;
+
+}
+
+function getAllFormDate(date) {
+
+    let stringDate = getStringFormat(date);
+
+    let ddmmyyyy = stringDate.day + stringDate.month + stringDate.year;
+    let mmddyyyy = stringDate.month + stringDate.day + stringDate.year;
+    let yyyymmdd = stringDate.year + stringDate.month + stringDate.day;
+    let ddmmyy = stringDate.day + stringDate.month + stringDate.year.slice(-2);
+    let mmddyy = stringDate.month + stringDate.day + stringDate.year.slice(-2);
+    let yymmdd = stringDate.year.slice(-2) + stringDate.month + stringDate.day;
+
+    return [ddmmyyyy, mmddyyyy, yyyymmdd, ddmmyy, mmddyy, yymmdd]
+}
+
+function getStringFormat(date) {
+    // {day: 10, month: 8, year: 2021}
+    let dateStr = { day: "", month: " ", year: "" }
+
+    /* dateStr.day = date.day < 10 ? "0" + date.day : date.day.toString();
+    dateStr.month = dateStr.month < 10 ? "0" + date.month : date.month.toString();
+    dateStr.year = date.year.toString(); */
+    if (date.day < 10) {
+        dateStr.day = '0' + date.day;
+    } else {
+        dateStr.day = date.day.toString();
+    }
+    if (date.month < 10) {
+        dateStr.month = "0" + date.month;
+    } else {
+        dateStr.month = date.month.toString();
+    }
+    dateStr.year = date.year.toString();
+    return dateStr
 
 }

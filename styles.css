@@ -8,126 +8,12 @@
     --background:#0e0f0f;
     --text-color:#ff1493;
     --border-text:#eee;
-    --hover-color:#27272c;
+    --hover-color:#000;
     --bold-text:#3e32e4; 
     --output :#00FF66; 
     --first : #E84E42;
 }
 
-/* .main-container{
-    width: 100vw;
-    min-height: 100vh;
-    border: 2px solid var(--bold-text);
-    margin: auto;
-    position: relative;
-    background-color: var(--background);
-}
-.text-heading{
-    text-align: center;
-    margin: 1.2rem;
-    padding: 0.4rem 7rem;
-}
-.text-heading .main-heading,.sub-heading{
-    color: var(--border-text);
-}
-.text-heading .main-heading p,h4{
-    color: var(--bold-text);
-    opacity: 0.8;
-}
-
-.function-container {
-    text-align: center;
-}
-.function-container .input-container{
-    margin: 1rem;
-}
-.function-container .output-container{
-    display: inline-block;
-    margin: 1rem;
-    height: 3rem;
-    width: 20%;
-    border: 1px solid var(--bold-text);
-    color: var(--border-text);
-} */
-
-
-/* nav bar */
-/* .nav-container{
-    background-color: var(--background);
-    border: 1px solid red;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    position: absolute;
-    bottom: 0;
-} */
-
-/* .nav-container .navbar{
-    display: flex;
-    justify-content: center;
-}
-
-.nav-container .navbar > *  {
-    margin: 1rem;
-    padding: 0.8rem 1rem;
-    padding: .64em .4rem;
-    font-weight: 800;
-    border: 1px solid white;
-    border-radius: 0.5rem;
-    color: var(--border-text);
-    transition: 0.5s;
-}
-.nav-container .navbar > *:hover{
-    background-color: var(--hover-color);
-    border-radius: 0.5rem;
-    color: var(--text-color);
-    cursor: pointer;
-    border: 0.1px solid rgba(0,0,0,.6);
-
-    border-radius: 0.5rem;
-} */
-/* 
-.main-container{
-    width: 100%;
-}
-
-.main-container .card-container{
-    width: 80%;
-    border: 1px solid red;
-    margin: 3rem auto;
-}
-.main-container .card-container .nav-bar{
-    margin: .5rem;
-    width: 100%;
-    display: flex;
-}
-
-.main-container .card-container .nav-bar .firstnavItems{
-    display: flex;
-    justify-content: center;
-    height: 40px;
-    width: 60%;
-}
-
-.main-container .card-container .nav-bar .secondnavItems{
-    display: flex;
-    width: 40%;
-    justify-content: end;
-    background-color: var(--first);
-}
-
-.main-container .card-container .nav-bar .secondnavItems > * {
-    margin:  .7rem;
-    padding: .3rem;
-    border: 1px solid red;
-}
-
-
-.card-container .verticalCardBody{
-    display: flex;
-    height: 70vh;
-    background-color: var(--first);
-} */
 .main-container{
     width: 100%;
     /* border: 1px solid red; */
@@ -145,25 +31,45 @@
     outline: none;
     box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
 }
+
+/* container div1 */
+
 .card-container .div1{
     width: 40%;
     
 }
 .card-container .div1 .div1navBar{
     height: 64px;
-    border: 1px solid red;
+    border: none;
 }
 .card-container .div1 .div1Content{
-
     text-align: center;
 }
-.card-container .div1 .div1Content  h4{
-    opacity: 0.7;
+.hide{
+    display: none;
 }
 
+.card-container .div1 .div1Content  .outputHeading{
+    opacity: 0.7;
+    font-size: medium;
+    padding: 0.8rem;
+}
+.card-container .div1 .div1Content  .output-container{
 
+    font-weight: bold;
+    font-size: larger;
+    border: 2px solid var(--background);
+    margin-left: .5rem;
+    margin-right: .5rem;
+    padding-bottom: .4rem;
+}
+.card-container .div1 .div1Content  .output-container span{
 
+    font-weight: bold;
+    font-size: xx-large;
+}
 
+/* container for div2 */
 .card-container .div2{
     width: 60%;
     background-color: var(--first);
@@ -175,6 +81,7 @@
     padding: 0.2%;
 
 }
+
 .div2 .div2navBar .navItems{
     display: flex;
     justify-content: flex-end;
@@ -186,6 +93,7 @@
     color: var(--border-text);
     font-weight: 400;
 }
+
 .div2 .div2Content{
     text-align: center;
     color: var(--border-text);
@@ -193,6 +101,7 @@
     width: 100%;
     
 }
+
 .div2 .div2Content span{
     color: var(--background);
 }
@@ -203,7 +112,7 @@
     margin-bottom: 1rem;
 }
 .div2 .div2Content .secondHeading{
-    font-size: 1.8rem;
+    font-size: large;
 }
 
 .div2 .div2Content .input-container  > *{
@@ -226,15 +135,105 @@
     border-color: var(--border-text);
 }
 
-/* background: transparent; */
-/* background-color: var(--border-text); */
 
-
-@media only screen and (max-width: 1039px) {
-.main-container .card-container{
-    /* flex-direction: column-reverse; */
+/* Text dotted animation */
+.blink{
+    color: var(--bold-text);
+    animation: pop 2s linear infinite;
 }
+@keyframes pop {
+    0%{
+        opacity: 1;
+    }
+    50% {
+      opacity: 0;
+    }
+    100%{
+        opacity: 1;
+    }
+  }
+  
+
+.div2 .div2navBar .navItems > *:hover{
+    color: var(--hover-color);
+    cursor: pointer;    
+}
+
+/* for medium screen device */
+@media only screen and (max-width: 962px) {
+    .main-container{
+        /* border: 1px solid red; */
+        height: 100vh;
+        
+    }
+    .main-container .card-container{
+        flex-direction: column-reverse;
+        height: auto;
+    } 
+
+    /* nav items */ 
+    .div2 .div2navBar{
+        margin: 0.1rem;
+        /* padding: 0.1%; */
+    
+    } 
+    .div2 .div2navBar .navItems > *{
+        margin: .2rem;
+        padding: .2rem;
+        color: var(--border-text);
+        font-weight: 500;
+    }
+
+    /* two divs */
+    /* second date Div */
     .card-container .div2{
-         /* width: 100%; */
+         width: auto;
+         height: auto;
+         font-size: 14px;
+    }
+    .div2 .div2Content p{
+        width: 90%;
+        margin-top: 0.1rem;
+        margin-bottom: 0.2rem;
+    }
+    
+    .div2 .div2Content .secondHeading{
+        font-size: 1.3rem;
+        font-stretch: expanded; 
+    }
+
+
+
+    /* first output div */
+    .card-container .div1{
+        width: 100%;
+        height: 100%;
+        font-size: 14px;
+        margin-bottom: 1.8rem;
+    }
+    .card-container .div1 .div1navBar{
+        height: 10px;
+    }
+
+    /* hide & inhide text  in div1*/
+    .tobeHide{
+        /* z-index: 0; */
+        display: none;
+    }
+    .hide{
+        display: block;
+    }
+
+}
+
+/* for small screen device */
+@media only screen and (max-width: 400px) {
+    .main-container .card-container{
+        display: flex;
+        width: 100%;
+        height: auto;
+        margin: auto;
+        outline: none;
+        box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
     }
 }
