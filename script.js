@@ -1,26 +1,41 @@
 
-let dataInput = document.querySelector('#dateFormat'); //
+let dataInput = document.querySelector('#dateFormat');
 let output = document.querySelector('#output');
 let showBtn = document.querySelector('#btn');
+let errorText = document.querySelector('em');
+
+let loading_gif = document.querySelector("#gif");
 
 showBtn.addEventListener('click', () => {
-    let bdayStr = dataInput.value;
-    if (bdayStr != "") {
-        let listOfDate = bdayStr.split("-");
-        let dateObj = {
-            day: Number(listOfDate[2]),
-            month: Number(listOfDate[1]),
-            year: Number(listOfDate[0])
-        }
+    if (dataInput.value < 0) {
+        errorText.display = 'block'
+    } else {
 
-        let pallindrome = checkPallindromeDateFrCombination(dateObj);
+        let bdayStr = dataInput.value;
+        if (bdayStr != "") {
+            let listOfDate = bdayStr.split("-");
+            let dateObj = {
+                day: Number(listOfDate[2]),
+                month: Number(listOfDate[1]),
+                year: Number(listOfDate[0])
+            }
 
-        if (pallindrome) {
-            output.innerHTML = `Your Birthdate is Pallindrome`
-        } else {
-            // let [missDate, nextDate] = getNextPallindromeDate(dateObj);
-            let [missDate, nextDate] = getNextPallindromeDate(dateObj);
-            output.innerHTML = `You miss by ${missDate}. Date : ${nextDate.day} - ${nextDate.month} - ${nextDate.year}`
+            let pallindrome = checkPallindromeDateFrCombination(dateObj);
+
+            if (pallindrome) {
+                output.innerHTML = `Your Birthdate is Pallindrome`
+            } else {
+                output.style.display = 'none'
+                loading_gif.style.display = 'block'
+                setTimeout(() => {
+                    output.style.display = 'block'
+                    loading_gif.style.display = 'none'
+                    inputDatehandler()
+                }, 3500)
+                // let [missDate, nextDate] = getNextPallindromeDate(dateObj);
+                let [missDate, nextDate] = getNextPallindromeDate(dateObj);
+                output.innerHTML = `You miss by ${missDate}. Date : ${nextDate.day} - ${nextDate.month} - ${nextDate.year}`
+            }
         }
     }
 })
@@ -79,7 +94,6 @@ function getNextdate(dateObj) {
         month: month,
         year: year
     }
-
 }
 
 /* leap year check */
@@ -99,6 +113,7 @@ function checkPallindromeDateFrCombination(date) {
 
     for (let i = 0; i < allFormDates.length; i++) {
         if (isPallindrome(allFormDates[i])) {
+            console.log(allFormDates[i])
             flag = true;
             break;
         }

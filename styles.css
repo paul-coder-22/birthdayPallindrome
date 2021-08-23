@@ -54,6 +54,13 @@
     font-size: medium;
     padding: 0.8rem;
 }
+#gif{
+    padding: 10px;
+    max-width: 200px;
+    margin: auto;
+    display: none;
+}
+
 .card-container .div1 .div1Content  .output-container{
 
     font-weight: bold;
@@ -93,6 +100,11 @@
     color: var(--border-text);
     font-weight: 400;
 }
+.div2 .div2navBar .navItems div a {
+    text-decoration: none !important;
+    color: var(--border-text) !important; 
+}
+
 
 .div2 .div2Content{
     text-align: center;
