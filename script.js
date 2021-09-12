@@ -34,7 +34,7 @@ showBtn.addEventListener('click', () => {
                 }, 3500)
                 // let [missDate, nextDate] = getNextPallindromeDate(dateObj);
                 let [missDate, nextDate] = getNextPallindromeDate(dateObj);
-                output.innerHTML = `You miss by ${missDate}. Date : ${nextDate.day} - ${nextDate.month} - ${nextDate.year}`
+                output.innerHTML = `OOPS! Your birthday is not a palindrome.You miss by ${missDate}. The nearest palindrome is : ${nextDate.day} - ${nextDate.month} - ${nextDate.year}`
             }
         }
     }
